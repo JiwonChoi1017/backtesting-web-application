@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+import LoginForm from "@/components/login/Form";
+
 const Home = () => {
   const [message, setMessage] = useState<string>("");
 
@@ -14,6 +16,7 @@ const Home = () => {
   return (
     <div>
       <p>{message}</p>
+      <LoginForm />
     </div>
   );
 };
