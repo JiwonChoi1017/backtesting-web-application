@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, request, abort
 from services.common import stock_data
 
 app = Blueprint("index", __name__)
@@ -6,7 +6,17 @@ app = Blueprint("index", __name__)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    stockData = stock_data.StockData()
-    df = stockData.fetch_stock_data("AAPL")
+    try:
+        if request.method == "GET":
+            return "GET!"
+        elif request.method == "POST":
+            print(request.form["ticker"])
+            stockData = stock_data.StockData()
+            response = stockData.fetch_stock_data("AAPL")
 
-    return "Hello from Flask!"
+            return "POST!"
+        else:
+            return abort(400)
+    except Exception as e:
+        return str(e)
+

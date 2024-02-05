@@ -2,6 +2,9 @@
 
 import { useEffect, useState } from "react";
 
+import Card from "@/components/common/ui/Card";
+import RegisterForm from "@/components/register/Form";
+
 const Home = () => {
   const [message, setMessage] = useState<string>("");
 
@@ -14,6 +17,9 @@ const Home = () => {
   return (
     <div>
       <p>{message}</p>
+      <Card>
+        <RegisterForm />
+      </Card>
     </div>
   );
 };
