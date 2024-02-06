@@ -1,8 +1,13 @@
+import { FormEvent } from "react";
 import { SubmitButton } from "../common/ui/Button";
 
-const SearchForm = () => {
+type Props = {
+  submitHandler: (e: FormEvent<HTMLFormElement>) => Promise<void>;
+};
+
+const SearchForm = ({ submitHandler }: Props) => {
   return (
-    <form method="post">
+    <form onSubmit={submitHandler}>
       <div>
         <label htmlFor="ticker">ティッカー</label>
         <input id="ticker" name="ticker" type="text" />
