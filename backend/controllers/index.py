@@ -1,4 +1,4 @@
-from flask import Blueprint, request, abort
+from flask import Blueprint, request, abort, jsonify
 from services.common import stock_data
 
 app = Blueprint("index", __name__)
@@ -10,13 +10,16 @@ def index():
         if request.method == "GET":
             return "GET!"
         elif request.method == "POST":
-            print(request.form["ticker"])
-            stockData = stock_data.StockData()
-            response = stockData.fetch_stock_data("AAPL")
+            params = request.json
+            if "ticker" not in params:
+                return
 
-            return "POST!"
+            ticker = params["ticker"]
+            stockData = stock_data.StockData()
+            response = stockData.fetch_stock_data(ticker)
+
+            return "POST"
         else:
             return abort(400)
     except Exception as e:
         return str(e)
-
